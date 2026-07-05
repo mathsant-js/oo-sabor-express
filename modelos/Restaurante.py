@@ -3,9 +3,10 @@ class Restaurante:
     
     # self._ativo -> estado interno do objeto (dado)
     # ativo -> interface pública (como a variável será apresentada)
+    # String vazia em Python é considerada False em um contexto Booleano
     
     def __init__(self, nome, categoria):    
-        self._nome = nome
+        self._nome = nome.title()
         self._categoria = categoria
         self._ativo = False
         Restaurante.restaurantes.append(self)
@@ -25,10 +26,3 @@ class Restaurante:
     
     def alternar_estado(self):
         self._ativo = not self._ativo
-    
-restaurante_praca = Restaurante("Praça", "Italiana")
-restaurante_pizza = Restaurante("Pizza Place", "Fast Food")
-
-restaurante_pizza.alternar_estado()
-
-Restaurante.listar_restaurantes()
