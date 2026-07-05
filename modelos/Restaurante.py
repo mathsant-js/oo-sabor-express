@@ -19,12 +19,12 @@ class Restaurante:
     
     @classmethod
     def listar_restaurantes(cls):
-        print("-" * 56)
-        print(f"| {'Nome do Restaurante'.ljust(20)} | {'Categoria'.ljust(20)} | Status |")
-        print(f"|{'-' * 22}|{'-' * 22}|{'-' * 8}|")
+        print("-" * 79)
+        print(f"| {'Nome do Restaurante'.ljust(20)} | {'Categoria'.ljust(20)} | {'Avaliação'.ljust(20)} | Status |")
+        print(f"|{'-' * 22}|{'-' * 22}|{'-' * 22}|{'-' * 8}|")
         for restaurante in cls.restaurantes:
-            print(f"| {restaurante._nome.ljust(20)} | {restaurante._categoria.ljust(20)} |   {restaurante.ativo.ljust(3)} |")
-        print("-" * 56)
+            print(f"| {restaurante._nome.ljust(20)} | {restaurante._categoria.ljust(20)} | {str(restaurante.media_avaliacoes).ljust(20)} |   {restaurante.ativo.ljust(3)} |")
+        print("-" * 79)
     
     @property
     def nome(self):
