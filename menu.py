@@ -44,7 +44,8 @@ def exibir_opcoes():
     print("2. Listar restaurante")
     print("3. Alterar estado do restaurante")
     print("4. Avaliar restaurante")
-    print("5. Sair\n")
+    print("5. Listar avaliações de um restaurante")
+    print("6. Sair\n")
 
 def escolher_opcao():
     """Função que captura escolha de opção do usuário
@@ -77,6 +78,10 @@ def escolher_opcao():
                 Restaurante.cadastrar_nova_avaliacao()
                 voltar_ao_menu_principal()
             case 5:
+                exibir_subtitulo("Listando as Avaliações de um Restaurante")
+                Restaurante.listar_avaliacoes()
+                voltar_ao_menu_principal()
+            case 6:
                 finalizar_app()
             case _:
                 opcao_invalida()

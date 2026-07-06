@@ -41,7 +41,7 @@ class Restaurante:
         for restaurante in cls.restaurantes:
             if nome.lower() == restaurante.nome.lower():
                 return restaurante
-            return None
+        return None
     
     @classmethod
     def selecionar_restaurante_para_alternar_estado(cls):
@@ -140,11 +140,25 @@ class Restaurante:
         self._avaliacoes.append(avaliacao)
         print("Avaliação cadastrada com sucesso!")
         
-    def listar_avaliacoes(self):
+    @classmethod    
+    def listar_avaliacoes(cls):
         """Retorna uma lista da avaliações de um restaurante"""
-        print(f"Avaliações do Restaurante {self.nome}")
-        for avaliacao in self.avaliacoes:
-            print(f"- Nome: {avaliacao.cliente} | Avaliação: {avaliacao.nota}")
+        nome_restaurante = input("Digite o nome do restaurante: ")
+        
+        restaurante = cls.buscar_restaurante(nome_restaurante)
+        
+        if not restaurante:
+            print("O restaurante não foi encontrado!")
+            return
+        
+        print(f"\nAvaliações do Restaurante: {restaurante.nome}")
+        
+        if not restaurante.avaliacoes:
+            print("O restaurante não possui avaliações")
+            return
+        
+        for avaliacao in restaurante.avaliacoes:
+            print(f"- Cliente: {avaliacao.cliente} | Nota: {avaliacao.nota}")
             
     @property
     def media_avaliacoes(self):
