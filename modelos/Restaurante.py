@@ -35,19 +35,24 @@ class Restaurante:
         for restaurante in cls.restaurantes:
             print(f"| {restaurante._nome.ljust(20)} | {restaurante._categoria.ljust(20)} | {str(restaurante.media_avaliacoes).ljust(20)} |   {restaurante.ativo.ljust(3)} |")
         print("-" * 79)
+        
+    @classmethod
+    def buscar_restaurante(cls, nome):
+        for restaurante in cls.restaurantes:
+            if nome.lower() == restaurante.nome.lower():
+                return restaurante
+            return None
     
     @classmethod
     def selecionar_restaurante_para_alternar_estado(cls):
         nome_restaurante = input("Digite o nome do restaurante: ")
-        restaurante_encontrado = False
         
-        for restaurante in cls.restaurantes:
-            if nome_restaurante.lower() == restaurante.nome.lower():
-                restaurante_encontrado = True
-                restaurante.alternar_estado()
-                restaurante.mensagem_sucesso(nome_restaurante)
-                
-        if not restaurante_encontrado:
+        restaurante = Restaurante.buscar_restaurante(nome_restaurante)
+        
+        if restaurante:
+            restaurante.alternar_estado()
+            restaurante.mensagem_sucesso(nome_restaurante)
+        else:
             print("O restaurante não foi encontrado!")
             
                 
@@ -82,14 +87,11 @@ class Restaurante:
         cliente = input("Digite o seu nome: ")
         nota = float(input("Digite a sua avaliação de 0 à 5: "))
         
-        restaurante_encontrado = False
+        restaurante = Restaurante.buscar_restaurante(nome_restaurante)
         
-        for restaurante in cls.restaurantes:
-            if nome_restaurante.lower() == restaurante.nome.lower():
-                restaurante_encontrado = True
-                restaurante.receber_avaliacao(cliente, nota)
-                
-        if not restaurante_encontrado:
+        if restaurante:
+            restaurante.receber_avaliacao(cliente, nota)
+        else:
             print("O restaurante não foi encotrado!")
     
     @property

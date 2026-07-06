@@ -61,16 +61,19 @@ def escolher_opcao():
 
         match opcao_escolhida:
             case 1:
-                exibir_subtitulo("Cadastrar novo restaurante")
+                exibir_subtitulo("Cadastrar Novo Restaurante")
                 Restaurante.cadastrar_novo_restaurante()
                 voltar_ao_menu_principal()
             case 2:
+                exibir_subtitulo("Listando os Restaurantes")
                 Restaurante.listar_restaurantes()
                 voltar_ao_menu_principal()
             case 3:
+                exibir_subtitulo("Alternando Estado do Restaurante")
                 Restaurante.selecionar_restaurante_para_alternar_estado()
                 voltar_ao_menu_principal()
             case 4:
+                exibir_subtitulo("Cadastrando Avaliação de Restaurante")
                 Restaurante.cadastrar_nova_avaliacao()
                 voltar_ao_menu_principal()
             case 5:
