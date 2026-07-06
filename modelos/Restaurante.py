@@ -38,6 +38,13 @@ class Restaurante:
         
     @classmethod
     def buscar_restaurante(cls, nome):
+        """Busca restaurante pelo nome
+        
+        Parâmetros:
+        - nome (str): nome do restaurante
+        
+        Retorna o objeto do restaurante de acordo com o nome
+        """
         for restaurante in cls.restaurantes:
             if nome.lower() == restaurante.nome.lower():
                 return restaurante
@@ -45,6 +52,11 @@ class Restaurante:
     
     @classmethod
     def selecionar_restaurante_para_alternar_estado(cls):
+        """Seleciona restaurante para alternan estado pelo nome
+        
+        Inputs:
+        - nome_restaurante (str): nome do restaurante
+        """
         nome_restaurante = input("Digite o nome do restaurante: ")
         
         restaurante = Restaurante.buscar_restaurante(nome_restaurante)
@@ -57,6 +69,14 @@ class Restaurante:
             
                 
     def mensagem_sucesso(self, nome_restaurante):
+        """Retorna mensagem de sucesso da operação de alternar estado do restaurante
+        
+        Parâmetros:
+        - nome_restaurante (str): nome do restaurante
+        
+        Output:
+        - mensagem (str): mensagem de sucesso da operação
+        """
         mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso!" if self._ativo else f"O restaurante {nome_restaurante} foi desativado com sucesso!"
         print(mensagem)
                 
@@ -83,6 +103,13 @@ class Restaurante:
     
     @classmethod
     def cadastrar_nova_avaliacao(cls):
+        """Cadastra nova avaliação de um restaurante
+        
+        Inputs:
+        - nome_restaurante (str): nome do restaurante
+        - cliente (str): nome do cliente
+        - nota (float): avaliação do cliente
+        """
         nome_restaurante = input("Digite o nome do restaurante: ")
         cliente = input("Digite o seu nome: ")
         nota = float(input("Digite a sua avaliação de 0 à 5: "))
