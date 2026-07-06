@@ -59,6 +59,9 @@ class Restaurante:
     def avaliacao_valida(nota):
         """Retorna se uma avaliação é válida"""
         return nota <= 5 and nota >= 0
+    
+    def restaurante_ativo(self):
+        return self._ativo
         
     def receber_avaliacao(self, cliente, nota):
         """Recebe avaliação e adiciona em uma lista de avaliações do restaurante
@@ -69,6 +72,10 @@ class Restaurante:
         """
         if not Restaurante.avaliacao_valida(nota):
             print(f"[ERRO] A nota deve ser de 0 à 5!\nNota recebida: {nota}")
+            return
+        
+        if not self.restaurante_ativo():
+            print(f"[ERRO] O restaurante deve estar ativo para receber uma avaliação!")
             return
         
         avaliacao = Avaliacao(cliente, nota)
