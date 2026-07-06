@@ -41,7 +41,15 @@ class Restaurante:
     def alternar_estado(self):
         self._ativo = not self._ativo
         
+    @staticmethod
+    def avaliacao_valida(nota):
+        return nota <= 5 and nota >= 0
+        
     def receber_avaliacao(self, cliente, nota):
+        if not Restaurante.avaliacao_valida(nota):
+            print(f"[ERRO] A nota deve ser de 0 à 5!\nNota recebida: {nota}")
+            return
+        
         avaliacao = Avaliacao(cliente, nota)
         self._avaliacoes.append(avaliacao)
         
@@ -53,7 +61,7 @@ class Restaurante:
     @property
     def media_avaliacoes(self):
         if not self.avaliacoes:
-            return 0
+            return "Sem avaliação"
         
         soma_avaliacoes = sum(avaliacao.nota for avaliacao in self.avaliacoes)
         quantidade_avaliacoes = len(self.avaliacoes)
