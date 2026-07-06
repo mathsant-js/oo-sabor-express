@@ -36,6 +36,62 @@ class Restaurante:
             print(f"| {restaurante._nome.ljust(20)} | {restaurante._categoria.ljust(20)} | {str(restaurante.media_avaliacoes).ljust(20)} |   {restaurante.ativo.ljust(3)} |")
         print("-" * 79)
     
+    @classmethod
+    def selecionar_restaurante_para_alternar_estado(cls):
+        nome_restaurante = input("Digite o nome do restaurante: ")
+        restaurante_encontrado = False
+        
+        for restaurante in cls.restaurantes:
+            if nome_restaurante.lower() == restaurante.nome.lower():
+                restaurante_encontrado = True
+                restaurante.alternar_estado()
+                restaurante.mensagem_sucesso(nome_restaurante)
+                
+        if not restaurante_encontrado:
+            print("O restaurante não foi encontrado!")
+            
+                
+    def mensagem_sucesso(self, nome_restaurante):
+        mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso!" if self._ativo else f"O restaurante {nome_restaurante} foi desativado com sucesso!"
+        print(mensagem)
+                
+    
+    @staticmethod
+    def cadastrar_novo_restaurante():
+        """Função que cadastra um novo restaurante
+        
+        Inputs:
+        - Nome do restaurante
+        - Categoria do restaurante
+        
+        Outputs:
+        - Adiciona novo restaurante a lista de restaurantes
+        - Exibe mensagem de sucesso ao cadastrar restaurante
+        
+        """
+        nome_restaurante = input("Digite o nome do restaurante que você deseja cadastrar: ")
+        categoria_restaurante = input(f"Digite a categoria do restaurante {nome_restaurante}: ")
+        
+        Restaurante(nome_restaurante, categoria_restaurante)
+        
+        print(f"O restaurante {nome_restaurante} foi cadastrado com sucesso!")
+    
+    @classmethod
+    def cadastrar_nova_avaliacao(cls):
+        nome_restaurante = input("Digite o nome do restaurante: ")
+        cliente = input("Digite o seu nome: ")
+        nota = float(input("Digite a sua avaliação de 0 à 5: "))
+        
+        restaurante_encontrado = False
+        
+        for restaurante in cls.restaurantes:
+            if nome_restaurante.lower() == restaurante.nome.lower():
+                restaurante_encontrado = True
+                restaurante.receber_avaliacao(cliente, nota)
+                
+        if not restaurante_encontrado:
+            print("O restaurante não foi encotrado!")
+    
     @property
     def nome(self):
         """Exibição do nome do restaurante"""
@@ -80,6 +136,7 @@ class Restaurante:
         
         avaliacao = Avaliacao(cliente, nota)
         self._avaliacoes.append(avaliacao)
+        print("Avaliação cadastrada com sucesso!")
         
     def listar_avaliacoes(self):
         """Retorna uma lista da avaliações de um restaurante"""
